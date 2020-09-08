@@ -17,6 +17,9 @@
         android:id="@+id/popup_user_image"
         tools:srcCompat="@tools:sample/avatars"/>
 
+
+
+
     <EditText
         android:background="@drawable/popup_edittext_style"
         android:id="@+id/popup_title"
@@ -29,6 +32,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/popup_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popup_title"
+        />
+
     <EditText
         android:hint="Description"
         android:background="@drawable/popup_edittext_style"
@@ -39,7 +51,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/popup_title" />
+        app:layout_constraintTop_toBottomOf="@+id/popup_spinner" />
 
     <ImageView
         android:background="#2d2d2d"

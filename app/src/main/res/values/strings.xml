@@ -11,8 +11,23 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string-array name="locations">
+        <item>Select Location</item>
+        <item>Dhanmondi</item>
+        <item>Gulshan</item>
+        <item>Mirpur</item>
+        <item>Baridhara</item>
+        <item>Shantinagar</item>
+    </string-array>
+
+    //login
+    <string name="userIdString">Enter Your Email Id</string>
+    <string name="userPasswordString">Enter Your Password</string>
+    <string name="signUp_register">Are you not regiestered? Sign Up</string>
+    <string name="signIn_register">Are you already regiestered? Sign In</string>
+
 
     <string name="home_second">Home Second</string>
 

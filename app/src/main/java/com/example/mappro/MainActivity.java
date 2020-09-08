@@ -49,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+
+        Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(intent3);
+            }
+        });
+
     }
 
     public boolean isServicesOK() {

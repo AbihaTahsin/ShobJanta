@@ -1,4 +1,4 @@
-package com.example.mappro.ui.gallery;
+package com.example.mappro.ui.openMap;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,31 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.example.mappro.Home;
-import com.example.mappro.MainActivity;
 import com.example.mappro.MapActivity;
 import com.example.mappro.R;
 
-public class GalleryFragment extends Fragment {
+public class OpenMapFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
 
-    public GalleryFragment(){
+    public OpenMapFragment(){
 
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_openmap, container, false);
 
         Button mapbtn = (Button) view.findViewById(R.id.btnMap);

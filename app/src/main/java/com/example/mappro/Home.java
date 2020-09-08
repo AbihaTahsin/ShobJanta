@@ -9,10 +9,14 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -39,8 +44,11 @@ public class Home extends AppCompatActivity {
     Dialog popAddpost;
     ImageView popupUserImage,popupPostImage,popupAddBtn;
     TextView popupTitle,popupDescription;
+    Spinner popupSpinner;
     ProgressBar popupClickProgress;
     private Uri pickedImgUri = null;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,7 @@ public class Home extends AppCompatActivity {
 
         //initialize popup
         iniPopup();
+
         setupPopupImageClick();
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -62,12 +71,15 @@ public class Home extends AppCompatActivity {
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_map, R.id.nav_posts,R.id.nav_settings)
                 .setDrawerLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -92,6 +104,7 @@ public class Home extends AppCompatActivity {
         popupDescription = popAddpost.findViewById(R.id.popup_description);
         popupAddBtn = popAddpost.findViewById(R.id.popup_add);
         popupClickProgress = popAddpost.findViewById(R.id.popup_progressBar);
+
 
         //App post click listener
 
@@ -175,9 +188,26 @@ public class Home extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        mAuth = FirebaseAuth.getInstance();
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
-        return true;
+        /*getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+        return true;*/
+
+        getMenuInflater().inflate(R.menu.navigation_drawer,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.signout)
+        {
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            Intent intent = new Intent(getApplicationContext(),SignInActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -186,6 +216,12 @@ public class Home extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
+
+
+
+
 
 
 }
