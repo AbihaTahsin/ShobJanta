@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/wall">
 
 
     <EditText
         android:id="@+id/signInuserIdText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="190dp"
         android:layout_x="1dp"
         android:layout_y="30dp"
         android:hint="@string/userIdString"
@@ -21,7 +23,7 @@
     <EditText
         android:id="@+id/signInpassText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_x="1dp"
         android:layout_y="74dp"
         android:hint="@string/userPasswordString"
@@ -31,18 +33,20 @@
     <Button
         android:id="@+id/signInbutton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:layout_x="-2dp"
         android:layout_y="160dp"
         android:background="@drawable/custom_button"
-        android:textColor="#ffbbff"
-        android:text="Signin" />
+        android:textColor="#4c4c4c"
+        android:text="Sign in"
+        android:textSize="15sp"/>
+
     <TextView
         android:id="@+id/signUpregTextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="85dp"
         android:layout_y="160dp"
         android:hint="@string/signUp_register"> </TextView>
