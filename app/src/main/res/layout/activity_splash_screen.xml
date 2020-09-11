@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
-    android:background="#6C297F">
+    android:background="@drawable/splash">
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/demo"/>
+        android:src="@drawable/splash"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
