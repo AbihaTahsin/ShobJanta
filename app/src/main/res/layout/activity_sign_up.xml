@@ -10,11 +10,30 @@
     android:background="@drawable/wall">
 
 
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="65dp"
+        android:id="@+id/Userdp"
+        android:src="@drawable/circle_bg"
+        />
+
+
+    <EditText
+        android:id="@+id/Username"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_x="1dp"
+        android:layout_y="30dp"
+        android:hint="Enter Your Name"
+        android:textColor="@android:color/black" />
+
     <EditText
         android:id="@+id/signUpuserIdText"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="190dp"
         android:layout_x="1dp"
         android:layout_y="30dp"
         android:hint="@string/userIdString"
