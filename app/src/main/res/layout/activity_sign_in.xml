@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/popup_user_image"
+        android:layout_marginLeft="150dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dpicon"
+        android:padding="8dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
         android:id="@+id/signInuserIdText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_x="1dp"
         android:layout_y="30dp"
         android:hint="@string/userIdString"

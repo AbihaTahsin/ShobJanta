@@ -24,6 +24,7 @@
 
     //login
     <string name="userIdString">Enter Your Email Id</string>
+    <string name="userName">Enter User Name</string>
     <string name="userPasswordString">Enter Your Password</string>
     <string name="signUp_register">Are you not regiestered? Sign Up</string>
     <string name="signIn_register">Are you already regiestered? Sign In</string>

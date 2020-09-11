@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText signInmail,signInpass;
+    private EditText signInmail,signInpass,userName;
     private Button signInbutton;
     private TextView signUpreg;
     ProgressBar progressBar;
@@ -100,6 +102,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 if (task.isSuccessful()) {
                     finish();
                     Toast.makeText(SignInActivity.this, " LogIn Successful!", Toast.LENGTH_LONG).show();
+
                     Intent intent = new Intent(getApplicationContext(), Home.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
