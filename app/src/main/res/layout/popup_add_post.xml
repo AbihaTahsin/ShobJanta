@@ -12,17 +12,14 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/popup_description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/popup_title"
+        app:layout_constraintStart_toEndOf="@+id/popup_loc"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/popup_user_image"
         tools:srcCompat="@tools:sample/avatars"/>
 
-
-
-
     <EditText
         android:background="@drawable/popup_edittext_style"
-        android:id="@+id/popup_title"
+        android:id="@+id/popup_loc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -32,14 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/popup_spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/popup_title"
-        />
 
     <EditText
         android:hint="Description"
@@ -51,7 +40,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/popup_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/popup_loc" />
 
     <ImageView
         android:background="#2d2d2d"

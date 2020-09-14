@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -26,6 +27,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 import androidx.annotation.NonNull;
@@ -43,16 +49,18 @@ public class Home extends AppCompatActivity  {
 
     private static  int PReqCode = 2 ;
     private static  int REQUESCODE = 2 ;
+
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser ;
+    Dialog popAddPost ;
+
     private AppBarConfiguration mAppBarConfiguration;
     Dialog popAddpost;
     ImageView popupUserImage,popupPostImage,popupAddBtn;
-    TextView popupTitle,popupDescription;
-    Spinner popupSpinner;
+    TextView popupTitle,popupLoc,popupDescription;
     ProgressBar popupClickProgress;
      Uri pickedImgUri=null;
 
-    private FirebaseAuth mAuth;
-    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +100,27 @@ public class Home extends AppCompatActivity  {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+    private void setupPopupImageClick() {
+
+
+        popupPostImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // here when image clicked we need to open the gallery
+                // before we open the gallery we need to check if our app have the access to user files
+                // we did this before in register activity I'm just going to copy the code to save time ...
+
+
+                checkAndRequestForPermission();
+
+
+            }
+        });
+
+    }
+
+
     private void openGallery() {
         //TODO: open gallery intent and wait for user to pick an image !
 
@@ -154,11 +183,14 @@ public class Home extends AppCompatActivity  {
         // ini popup widgets
         popupUserImage = popAddpost.findViewById(R.id.popup_user_image);
         popupPostImage = popAddpost.findViewById(R.id.popup_img);
-        popupTitle = popAddpost.findViewById(R.id.popup_title);
+        popupLoc = popAddpost.findViewById(R.id.popup_loc);
         popupDescription = popAddpost.findViewById(R.id.popup_description);
         popupAddBtn = popAddpost.findViewById(R.id.popup_add);
         popupClickProgress = popAddpost.findViewById(R.id.popup_progressBar);
 
+        // load Current user profile photo
+
+        Glide.with(Home.this).load(currentUser.getPhotoUrl()).into(popupUserImage);
 
         //App post click listener
 
@@ -168,7 +200,7 @@ public class Home extends AppCompatActivity  {
                 popupAddBtn.setVisibility(View.INVISIBLE);
                 popupClickProgress.setVisibility(View.VISIBLE);
 
-                if(!popupTitle.getText().toString().isEmpty()&&
+                if(!popupLoc.getText().toString().isEmpty()&&
                 !popupDescription.getText().toString().isEmpty()
                 && pickedImgUri!=null)
                 {
@@ -177,38 +209,105 @@ public class Home extends AppCompatActivity  {
                     //1st need to upload post image
                     // access firebase storage
 
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("blog_images");
+                    final StorageReference imageFilePath = storageReference.child(pickedImgUri.getLastPathSegment());
+                    imageFilePath.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                            imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String imageDownlaodLink = uri.toString();
+                                    // create post Object
+                                    Post post = new Post(popupLoc.getText().toString(),
+                                            popupDescription.getText().toString(),
+                                            imageDownlaodLink,
+                                            currentUser.getUid(),
+                                            currentUser.getPhotoUrl().toString());
+
+                                    // Add post to firebase database
+
+                                    addPost(post);
+
+
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // something goes wrong uploading picture
+
+                                    showMessage(e.getMessage());
+                                    popupClickProgress.setVisibility(View.INVISIBLE);
+                                    popupAddBtn.setVisibility(View.VISIBLE);
+
+
+
+                                }
+                            });
+
+
+                        }
+                    });
+
+
+
+
+
+
+
+
                 }
+                else {
+                    showMessage("Please verify all input fields and choose Post Image") ;
+                    popupAddBtn.setVisibility(View.VISIBLE);
+                    popupClickProgress.setVisibility(View.INVISIBLE);
+
+                }
+
+
+
             }
         });
 
+
+
     }
 
+    private void addPost(Post post) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        DatabaseReference myRef = database.getReference("Posts").push();
+
+        // get post unique ID and upadte post key
+        String key = myRef.getKey();
+        post.setPostKey(key);
 
 
+        // add post data to firebase database
+
+        myRef.setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Intent one = new Intent(Home.this, Home.class);
+                startActivity(one);
+
+                showMessage("Post Added successfully");
+                popupClickProgress.setVisibility(View.INVISIBLE);
+                popupAddBtn.setVisibility(View.VISIBLE);
+                popAddPost.dismiss();
+            }
+    });
+
+    }
 
 
     private void showMessage(String message) {
         Toast.makeText(Home.this,message,Toast.LENGTH_LONG).show();
     }
 
-    private void setupPopupImageClick() {
 
-
-        popupPostImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // here when image clicked we need to open the gallery
-                // before we open the gallery we need to check if our app have the access to user files
-                // we did this before in register activity I'm just going to copy the code to save time ...
-
-                openGallery();
-                checkAndRequestForPermission();
-
-
-            }
-        });
-
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
