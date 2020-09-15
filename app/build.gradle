@@ -42,6 +42,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:19.1.1'
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.google.firebase:firebase-database:19.3.0'
+    implementation 'com.firebase:geofire-java:3.0.0'
 
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
