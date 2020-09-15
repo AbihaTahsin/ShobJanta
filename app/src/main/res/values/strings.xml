@@ -28,6 +28,11 @@
     <string name="userPasswordString">Enter Your Password</string>
     <string name="signUp_register">Are you not regiestered? Sign Up</string>
     <string name="signIn_register">Are you already regiestered? Sign In</string>
+    <string name="resetPass">Reset Password</string>
+    <string name="resetEmail">Enter email Address</string>
+    <string name="emailText">We will send you a link when you provide a link.
+   \n Please click on the link to reset your password</string>
+    <string name="resetName">Reset UserName</string>
 
 
     <string name="home_second">Home Second</string>

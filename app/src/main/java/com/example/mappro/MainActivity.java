@@ -1,8 +1,5 @@
 package com.example.mappro;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,22 +8,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.mappro.ui.Settings;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
+    Fragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
 
 
     @Override
@@ -38,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
             init();
         }
     }
-
+    public void addFragment()
+    {
+         fragment= new Settings();
+         fragmentManager=getSupportFragmentManager();
+         fragmentTransaction=fragmentManager.beginTransaction();
+         fragmentTransaction.add(R.id.fragment_container,fragment);
+         fragmentTransaction.commit();
+    }
     private void init(){
 
         Button btnHome = (Button) findViewById(R.id.btnHome);
@@ -81,5 +85,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
 
 }

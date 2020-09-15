@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "961260521090",
-    "firebase_url": "https://mappro-274002.firebaseio.com",
-    "project_id": "mappro-274002",
-    "storage_bucket": "mappro-274002.appspot.com"
+    "project_number": "755071641240",
+    "firebase_url": "https://shobjanta-bfa9b.firebaseio.com",
+    "project_id": "shobjanta-bfa9b",
+    "storage_bucket": "shobjanta-bfa9b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:961260521090:android:3c4d7fbe5fc1f60895569b",
+        "mobilesdk_app_id": "1:755071641240:android:c76417c8f28ba2842ad2ed",
         "android_client_info": {
           "package_name": "com.example.mappro"
         }
       },
       "oauth_client": [
         {
-          "client_id": "961260521090-83mne4p2p5j2eea5n2obleedvfmuvv8o.apps.googleusercontent.com",
+          "client_id": "755071641240-sak5u4mljiruuf5s681jg2v1ibbqhnll.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDbuFwHhNypEBwpBfaH_cuLxzOWWBh_Blg"
+          "current_key": "AIzaSyAF-8b1KJw82i2-qoOHolRU4upcCodvXWY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "961260521090-83mne4p2p5j2eea5n2obleedvfmuvv8o.apps.googleusercontent.com",
+              "client_id": "755071641240-sak5u4mljiruuf5s681jg2v1ibbqhnll.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
