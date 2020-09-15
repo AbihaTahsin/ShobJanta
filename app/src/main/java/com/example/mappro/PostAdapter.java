@@ -52,6 +52,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         TextView tvTitle;
         ImageView imgPost;
         ImageView imgPostProfile;
+        public ImageView like,comment, save;
+        public TextView likes,description,username,comments;
 
         public MyViewHolder(View itemView) {
             super(itemView);

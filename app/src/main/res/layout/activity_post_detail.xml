@@ -106,7 +106,7 @@ android:background="#fff">
         app:layout_constraintTop_toBottomOf="@+id/post_detail_desc"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <EditText
+     <EditText
 
         android:hint="Write Comment"
         android:background="@drawable/edittext_button_style_rounded"

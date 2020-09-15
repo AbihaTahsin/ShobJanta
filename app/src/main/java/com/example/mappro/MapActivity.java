@@ -30,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,11 +64,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
+    private LatLngBounds mMapBoundary;
+
+
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this,"Map is ready!",Toast.LENGTH_SHORT).show();
         Log.d(TAG,"OnMapReady: Map is ready");
         mMap = googleMap;
+
 
 
 
@@ -88,6 +95,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
     }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -204,6 +212,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+
+
     private void moveCamera(LatLng latlng,float zoom, String title){
         Log.d(TAG,"moveCamera: Moving the camera to Lat: "+latlng.latitude+",Lng: "+latlng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,zoom));
@@ -257,6 +267,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     mLocationPermissionsGranted = true;
                     Log.d(TAG,"OnRequestPermissionResult: Permission Granted");
                     initMap();
+
+
+
                 }
             }
         }
@@ -265,5 +278,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
+
+
+
 
 }
