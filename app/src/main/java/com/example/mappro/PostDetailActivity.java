@@ -3,8 +3,10 @@ package com.example.mappro;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,10 +28,11 @@ import java.util.Locale;
 
 public class PostDetailActivity<CommentAdapter> extends AppCompatActivity {
 
-    ImageView imgPost,imgUserPost,imgCurrentUser;
+    public static final String EXTRA_TEXT = "com.example.mappro.EXTRA_TEXT";
+
+    ImageView imgPost,imgUserPost;
     TextView txtPostDesc,txtPostDateName,txtPostLoc;
-    EditText editTextComment;
-    Button btnAddComment;
+    Button btnOpenMap;
     String PostKey;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -50,24 +53,22 @@ public class PostDetailActivity<CommentAdapter> extends AppCompatActivity {
 
         imgPost =findViewById(R.id.post_detail_img);
         imgUserPost = findViewById(R.id.post_detail_user_img);
-        imgCurrentUser = findViewById(R.id.post_detail_currentuser_img);
 
         txtPostLoc = findViewById(R.id.post_detail_loc);
         txtPostDesc = findViewById(R.id.post_detail_desc);
         txtPostDateName = findViewById(R.id.post_detail_date_name);
 
-        editTextComment = findViewById(R.id.post_detail_comment);
-        btnAddComment = findViewById(R.id.post_detail_add_comment_btn);
+
+        btnOpenMap = findViewById(R.id.open_map);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-
         String postImage = getIntent().getExtras().getString("postImage") ;
         Glide.with(this).load(postImage).into(imgPost);
 
-        String postLoc = getIntent().getExtras().getString("location");
+        final String postLoc = getIntent().getExtras().getString("location");
         txtPostLoc.setText(postLoc);
 
         String userpostImage = getIntent().getExtras().getString("userPhoto");
@@ -80,6 +81,15 @@ public class PostDetailActivity<CommentAdapter> extends AppCompatActivity {
 
         String date = timestampToString(getIntent().getExtras().getLong("postDate"));
         txtPostDateName.setText(date);
+
+        btnOpenMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(PostDetailActivity.this, LocationActivity.class);
+                intent3.putExtra(EXTRA_TEXT,postLoc);
+                startActivity(intent3);
+            }
+        });
 
     }
 

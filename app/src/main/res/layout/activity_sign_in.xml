@@ -7,14 +7,15 @@
     android:padding="10dp"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="@drawable/wall">
+    android:background="@drawable/wal2">
 
 
     <EditText
         android:id="@+id/signInuserIdText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="190dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="50dp"
         android:layout_x="1dp"
         android:layout_y="30dp"
         android:hint="@string/userIdString"
@@ -22,8 +23,9 @@
 
     <EditText
         android:id="@+id/signInpassText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_x="1dp"
         android:layout_y="74dp"
         android:hint="@string/userPasswordString"
@@ -32,9 +34,10 @@
 
     <Button
         android:id="@+id/signInbutton"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
         android:layout_x="-2dp"
         android:layout_y="160dp"
         android:background="@drawable/custom_button"
@@ -46,8 +49,8 @@
         android:id="@+id/signUpregTextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="85dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="75dp"
         android:layout_y="160dp"
         android:hint="@string/signUp_register"> </TextView>
 
