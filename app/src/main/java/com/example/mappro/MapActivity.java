@@ -10,7 +10,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,14 +31,11 @@ import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryDataEventListener;
-import com.firebase.geofire.LocationCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -99,8 +95,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     TextView mapDays,mapName;
     Button btnSet;
     Marker userLocationMarker;
-
-    private LocationRequest locationRequest;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -241,7 +235,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             Log.d(TAG,"onComplete: Found Location");
                             Location currentLocation = (Location) task.getResult();
 
-                            setUserLocationMarker(currentLocation);
                             moveCamera(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),DEFAULT_ZOOM,"My Location");
                         }else{
                             Log.d(TAG,"onComplete: Current Location is NULL");
@@ -258,22 +251,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void setUserLocationMarker(Location location){
 
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        if (userLocationMarker == null) {
-            //Create a new marker
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-
-            userLocationMarker = mMap.addMarker(markerOptions);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-        } else  {
-            //use the previously created marker
-            userLocationMarker.setPosition(latLng);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-        }
-
-
     }
 
     private void moveCamera(LatLng latlng,float zoom, String title){
@@ -284,7 +261,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             MarkerOptions options = new MarkerOptions()
                     .position(latlng)
                     .title(title);
-            //mMap.addMarker(options);
+            mMap.addMarker(options);
         }
 
         geoFire.setLocation(title, new GeoLocation(latlng.latitude, latlng.longitude), new GeoFire.CompletionListener() {
@@ -306,30 +283,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         initArea();
         settingGeoFire();
-        locationRequest = LocationRequest.create();
-        locationRequest.setInterval(500);
-        locationRequest.setFastestInterval(500);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
-
-    /*LocationCallback locationCallback = new LocationCallback() {
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            //super.onLocationResult(locationResult);
-            Log.d(TAG, "onLocationResult: " + locationResult.getLastLocation());
-            if (mMap != null) {
-                setUserLocationMarker(locationResult.getLastLocation());
-            }
-        }
-    };
-
-    private void startLocationUpdates() {
-        mFusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
-    }
-
-    private void stopLocationUpdates() {
-        mFusedLocationProviderClient.removeLocationUpdates(locationCallback);
-    }*/
 
     private void initArea() {
         eventArea = new ArrayList<>();

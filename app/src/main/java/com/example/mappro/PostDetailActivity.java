@@ -30,10 +30,9 @@ public class PostDetailActivity<CommentAdapter> extends AppCompatActivity {
 
     public static final String EXTRA_TEXT = "com.example.mappro.EXTRA_TEXT";
 
-    ImageView imgPost,imgUserPost,imgCurrentUser;
+    ImageView imgPost,imgUserPost;
     TextView txtPostDesc,txtPostDateName,txtPostLoc;
-    EditText editTextComment;
-    Button btnAddComment,btnOpenMap;
+    Button btnOpenMap;
     String PostKey;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -54,14 +53,12 @@ public class PostDetailActivity<CommentAdapter> extends AppCompatActivity {
 
         imgPost =findViewById(R.id.post_detail_img);
         imgUserPost = findViewById(R.id.post_detail_user_img);
-        imgCurrentUser = findViewById(R.id.post_detail_currentuser_img);
 
         txtPostLoc = findViewById(R.id.post_detail_loc);
         txtPostDesc = findViewById(R.id.post_detail_desc);
         txtPostDateName = findViewById(R.id.post_detail_date_name);
 
-        editTextComment = findViewById(R.id.post_detail_comment);
-        btnAddComment = findViewById(R.id.post_detail_add_comment_btn);
+
         btnOpenMap = findViewById(R.id.open_map);
 
         firebaseAuth = FirebaseAuth.getInstance();
