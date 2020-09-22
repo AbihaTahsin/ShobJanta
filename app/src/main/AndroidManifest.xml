@@ -27,12 +27,15 @@
 
         <activity android:name=".LocationActivity" />
         <activity android:name=".PostDetailActivity" />
+
         <activity
             android:name=".SignUpActivity" />
 
         <activity android:name=".SignInActivity" />
+
         <activity
-            android:name=".SplashScreen">
+            android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
